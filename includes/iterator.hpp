@@ -35,120 +35,160 @@ namespace ft
 		typedef std::random_access_iterator_tag	iterator_category;
 	};
 
-	template <typename T>
+
+	/********************************************************/
+	/******           ITERATOR CLASS TEMPLATE           *****/
+	/********************************************************/
+
+	template <typename Iter>
 	class iterator
 	{
+
+		/*********************************************/
+		/******           MEMBER TYPES           *****/
+		/*********************************************/
+
 	public:
-		typedef	T														Iter;
+		typedef	Iter													iterator_type;
 		typedef typename ft::iterator_traits<Iter>::difference_type		difference_type;
 		typedef typename ft::iterator_traits<Iter>::value_type			value_type;
 		typedef typename ft::iterator_traits<Iter>::pointer				pointer;
 		typedef typename ft::iterator_traits<Iter>::reference			reference;
 		typedef typename ft::iterator_traits<Iter>::iterator_category	iterator_category;
 
+		/*********************************************/
+		/******          MEMBER OBJECTS          *****/
+		/*********************************************/
+
 	protected:
-		pointer	_prt;
-	
+		pointer	_current;
+
+		/*********************************************/
+		/******         MEMBER FUNCTIONS         *****/
+		/*********************************************/
+
 	public:
 		iterator() {}
 		iterator(const iterator& src) { *this = src; }
-		iterator(pointer prt) { this->_prt = prt; }
+		iterator(pointer current) { this->_current = current; }
 		~iterator() {}
 
-		iterator	&operator=(const iterator &src)
+		iterator		&operator=(const iterator &src)
 		{
 			if (this == &src)
 				return *this;
-			this->_prt = src._prt;
+			this->_current = src._current;
 			return *this;
 		}
-		reference	operator*() const { return *this->_prt; }
-		pointer		operator->() const { return this->_prt; }
-		reference	operator[](size_t n) const { return *(this->_prt + n); }
-		iterator	operator++(__attribute__((unused)) int unused)
-		{
-			iterator	result(*this);
-			this->_prt++;
-			return result;
-		}
-		iterator	operator--(__attribute__((unused)) int unused)
-		{
-			iterator	result(*this);
-			this->_prt--;
-			return result;
-		}
-		iterator&	operator++() { this->_prt++; return *this; }
-		iterator&	operator--() { this->_prt--; return *this; }
-		iterator	operator+(size_t n) const { return iterator(this->_prt + n); }
-		iterator	operator-(size_t n) const { return iterator(this->_prt - n); }
-		int			operator-(const iterator& src) const { return this->_prt - src._prt; }
-		iterator&	operator+=(size_t n) { this->_prt += n; return *this; }
-		iterator&	operator-=(size_t n) { this->_prt -= n; return *this; }
-		bool		operator==(const iterator &src) const { return this->_prt == src._prt; }
-		bool		operator!=(const iterator &src) const { return this->_prt != src._prt; }
-		bool		operator>(const iterator &src) const { return this->_prt > src._prt; }
-		bool		operator>=(const iterator &src) const { return this->_prt >= src._prt; }
-		bool		operator<(const iterator &src) const { return this->_prt < src._prt; }
-		bool		operator<=(const iterator &src) const { return this->_prt <= src._prt; }
-		pointer		base() const { return this->_prt; }
+		
+		iterator_type	base() const { return this->_current; }
+		
+		reference		operator*() const { return *this->_current; }
+		pointer			operator->() const { return this->_current; }
+		
+		reference		operator[](difference_type n) const { return *(this->_current + n); }
+
+		iterator&		operator++() { this->_current++; return *this; }
+		iterator		operator++(__attribute__((unused)) int unused) { iterator result(*this); this->_current++; return result; }
+		iterator&		operator+=(difference_type n) { this->_current += n; return *this; }
+		iterator		operator+(difference_type n) const { return iterator(this->_current + n); }
+		iterator&		operator--() { this->_current--; return *this; }
+		iterator		operator--(__attribute__((unused)) int unused) { iterator result(*this); this->_current--; return result; }
+		iterator&		operator-=(difference_type n) { this->_current -= n; return *this; }
+		iterator		operator-(difference_type n) const { return iterator(this->_current - n); }
+
+		/**********************************************************************/
+		/******       NON-MEMBER FUNCTIONS - ITERATOR CLASS TEMPLATE      *****/
+		/**********************************************************************/
+
+		friend bool		operator==(const iterator& left, const iterator& rigth) { return left._current == rigth._current; }
+		friend bool		operator!=(const iterator& left, const iterator& rigth) { return left._current != rigth._current; }
+		friend bool		operator<(const iterator& left, const iterator& rigth) { return left._current < rigth._current; }
+		friend bool 	operator<=(const iterator& left, const iterator& rigth) { return left._current <= rigth._current; }
+		friend bool		operator>(const iterator& left, const iterator& rigth) { return left._current > rigth._current; }
+		friend bool 	operator>=(const iterator& left, const iterator& rigth) { return left._current >= rigth._current; }
+
+		friend iterator	operator+(difference_type n, const iterator& src) { return iterator(src._current + n); }
+
+		friend difference_type	operator-(const iterator& left, const iterator& right) { return left._current - right._current; }
 	};
 
-	template <typename T>
+
+	/****************************************************************/
+	/******           REVERSE_ITERATOR CLASS TEMPLATE           *****/
+	/****************************************************************/
+
+	template <typename Iter>
 	class reverse_iterator
 	{
+
+		/*********************************************/
+		/******           MEMBER TYPES           *****/
+		/*********************************************/
+
 	public:
-		typedef	T														Iter;
+		typedef	Iter													iterator_type;
 		typedef typename ft::iterator_traits<Iter>::difference_type		difference_type;
 		typedef typename ft::iterator_traits<Iter>::value_type			value_type;
 		typedef typename ft::iterator_traits<Iter>::pointer				pointer;
 		typedef typename ft::iterator_traits<Iter>::reference			reference;
 		typedef typename ft::iterator_traits<Iter>::iterator_category	iterator_category;
 
+		/*********************************************/
+		/******          MEMBER OBJECTS          *****/
+		/*********************************************/
+
 	protected:
-		pointer	_prt;
+		pointer	_current;
+
+		/*********************************************/
+		/******         MEMBER FUNCTIONS         *****/
+		/*********************************************/
 
 	public:
 		reverse_iterator() {}
 		reverse_iterator(const reverse_iterator& src) { *this = src; }
-		reverse_iterator(pointer prt) { this->_prt = prt; }
+		reverse_iterator(pointer _current) { this->_current = _current; }
 		~reverse_iterator() {}
 
 		reverse_iterator	&operator=(const reverse_iterator &src)
 		{
 			if (this == &src)
 				return *this;
-			this->_prt = src._prt;
+			this->_current = src._current;
 			return *this;
 		}
-		reference			operator*() const { return *this->_prt; }
-		pointer				operator->() const { return this->_prt; }
-		reference			operator[](size_t n) const { return *(this->_prt - n); }
-		reverse_iterator	operator++(__attribute__((unused)) int unused)
-		{
-			reverse_iterator	result(*this);
-			this->_prt--;
-			return result;
-		}
-		reverse_iterator	operator--(__attribute__((unused)) int unused)
-		{
-			reverse_iterator	result(*this);
-			this->_prt++;
-			return result;
-		}
-		reverse_iterator&	operator++() { this->_prt--; return *this; }
-		reverse_iterator&	operator--() { this->_prt++; return *this; }
-		reverse_iterator	operator+(size_t n) const { return reverse_iterator(this->_prt + n); }
-		reverse_iterator	operator-(size_t n) const { return reverse_iterator(this->_prt - n); }
-		int					operator-(const reverse_iterator& src) const { return this->_prt - src._prt; }
-		reverse_iterator&	operator+=(size_t n) { this->_prt -= n; return *this; }
-		reverse_iterator&	operator-=(size_t n) { this->_prt += n; return *this; }
-		bool				operator==(const reverse_iterator &src) const { return this->_prt == src._prt; }
-		bool				operator!=(const reverse_iterator &src) const { return this->_prt != src._prt; }
-		bool				operator>(const reverse_iterator &src) const { return this->_prt > src._prt; }
-		bool				operator>=(const reverse_iterator &src) const { return this->_prt >= src._prt; }
-		bool				operator<(const reverse_iterator &src) const { return this->_prt < src._prt; }
-		bool				operator<=(const reverse_iterator &src) const { return this->_prt <= src._prt; }
-		pointer				base() const { return this->_prt; }
+
+		iterator_type		base() const { return this->_current; }
+
+		reference			operator*() const { return *this->_current; }
+		pointer				operator->() const { return this->_current; }
+		
+		reference			operator[](difference_type n) const { return *(this->_current - n); }
+
+		reverse_iterator&	operator++() { this->_current--; return *this; }
+		reverse_iterator	operator++(__attribute__((unused)) int unused) { reverse_iterator result(*this); this->_current--; return result; }
+		reverse_iterator&	operator+=(difference_type n) { this->_current -= n; return *this; }
+		reverse_iterator	operator+(difference_type n) const { return reverse_iterator(this->_current - n); }
+		reverse_iterator&	operator--() { this->_current++; return *this; }
+		reverse_iterator	operator--(__attribute__((unused)) int unused) { reverse_iterator result(*this); this->_current++; return result; }
+		reverse_iterator&	operator-=(difference_type n) { this->_current += n; return *this; }
+		reverse_iterator	operator-(difference_type n) const { return reverse_iterator(this->_current + n); }
+
+		/******************************************************************************/
+		/******       NON-MEMBER FUNCTIONS - REVERSE_ITERATOR CLASS TEMPLATE      *****/
+		/******************************************************************************/
+
+		friend bool				operator==(const reverse_iterator &left, const reverse_iterator &right) { return left._current == right._current; }
+		friend bool				operator!=(const reverse_iterator &left, const reverse_iterator &right) { return left._current != right._current; }
+		friend bool				operator<(const reverse_iterator &left, const reverse_iterator &right) { return left._current > right._current; }
+		friend bool				operator<=(const reverse_iterator &left, const reverse_iterator &right) { return left._current >= right._current; }
+		friend bool				operator>(const reverse_iterator &left, const reverse_iterator &right) { return left._current < right._current; }
+		friend bool				operator>=(const reverse_iterator &left, const reverse_iterator &right) { return left._current <= right._current; }
+
+		friend reverse_iterator	operator+(difference_type n, const reverse_iterator& src) { return reverse_iterator(src._current - n); }
+
+		friend difference_type	operator-(const reverse_iterator &left, const reverse_iterator &right) { return right._current - left._current; }
 	};
 }
 

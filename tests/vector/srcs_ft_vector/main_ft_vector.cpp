@@ -26,5 +26,13 @@ int	main()
 
 	test_reverse_iterator_1();
 
+	std::cout << VIOLET;
+	std::cout << "------------------------------------------------------------" << std::endl;
+	std::cout << "------------   TEST VECTOR_REVERSE_ITERATOR 2   ------------" << std::endl;
+	std::cout << "------------------------------------------------------------" << std::endl;
+	std::cout << NORMAL;
+
+	test_reverse_iterator_2();
+
 	return 0;
 }

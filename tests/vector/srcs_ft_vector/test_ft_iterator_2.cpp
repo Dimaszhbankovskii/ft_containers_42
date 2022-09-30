@@ -1,6 +1,6 @@
 #include "ft_vector.hpp"
 
-std::ostream&	operator<<(std::ostream& outstream, const Fixed& fixed)
+static std::ostream&	operator<<(std::ostream& outstream, const Fixed& fixed)
 {
 	return outstream << "(" << fixed.getX() << " ; " << fixed.getY() << ")";
 }
@@ -26,6 +26,12 @@ void	test_iterator_2()
 	for (ft::vector<Fixed>::iterator it = fixedVector.begin(); it != fixedVector.end(); ++it)
 		std::cout << *it << " ";
 	std::cout << std::endl;
+
+	std::cout << "------------------------------------------------------------" << std::endl;
+
+	ft::vector<Fixed>::iterator::iterator_type	p = it1.base();
+
+	std::cout << "*p = it1.base() = " << *p << std::endl;
 
 	std::cout << "------------------------------------------------------------" << std::endl;
 
@@ -60,7 +66,6 @@ void	test_iterator_2()
 
 	std::cout << "it5 = it1 + 3 = " << *it5 << std::endl;
 	std::cout << "it6 = it5 - 2 = " << *it6 << std::endl;
-	std::cout << "it5 - it5 = " << it5 - it6 << std::endl;
 
 	it4 += 3;
 	std::cout << "it4 += 3 = " << *it4 << std::endl;
@@ -142,8 +147,9 @@ void	test_iterator_2()
 	
 	std::cout << "------------------------------------------------------------" << std::endl;
 
-	// Fixed	*p = it1.base();
-	// std::cout << "*p = it1.base() = " << *p << std::endl;
+	ft::vector<Fixed>::iterator	it7 = 2 + it1;
 
-	// std::cout << "------------------------------------------------------------" << std::endl;
+	std::cout << "it7 = 2 + it1 = " << *it7 << std::endl;
+
+	std::cout << "------------------------------------------------------------" << std::endl;
 }

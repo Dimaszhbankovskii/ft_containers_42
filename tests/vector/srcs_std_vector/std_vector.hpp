@@ -21,6 +21,7 @@
 void	test_iterator_1();
 void	test_iterator_2();
 void	test_reverse_iterator_1();
+void	test_reverse_iterator_2();
 
 class Fixed
 {

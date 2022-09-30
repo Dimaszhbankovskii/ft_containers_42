@@ -1,4 +1,4 @@
-#include "std_vector.hpp"
+#include "ft_vector.hpp"
 
 static std::ostream&	operator<<(std::ostream& outstream, const Fixed& fixed)
 {
@@ -7,8 +7,8 @@ static std::ostream&	operator<<(std::ostream& outstream, const Fixed& fixed)
 
 void	test_reverse_iterator_2()
 {
-	std::vector<Fixed>			        fixedVector;
-	std::vector<Fixed>::reverse_iterator	it1, it2;
+	ft::vector<Fixed>			        fixedVector;
+	ft::vector<Fixed>::reverse_iterator	it1, it2;
 
 	fixedVector.push_back(Fixed(1, 1.5f));
 	fixedVector.push_back(Fixed(2, 2.5f));
@@ -23,7 +23,7 @@ void	test_reverse_iterator_2()
 	it2 = fixedVector.rend() - 1;
 	
 	std::cout << "fixedVector: ";
-	for (std::vector<Fixed>::reverse_iterator it = fixedVector.rbegin(); it != fixedVector.rend(); ++it)
+	for (ft::vector<Fixed>::reverse_iterator it = fixedVector.rbegin(); it != fixedVector.rend(); ++it)
 		std::cout << *it << " ";
 	std::cout << std::endl;
 
@@ -32,8 +32,8 @@ void	test_reverse_iterator_2()
 	std::cout << "*( it1 = fixedVector.rbegin() ) = " << *it1 << std::endl;
 	std::cout << "*( it2 = fixedVector.rend() - 1 )= " << *it2 << std::endl;
 
-	std::vector<Fixed>::reverse_iterator	it3(it1);
-	std::vector<Fixed>::reverse_iterator	it4 = it1;
+	ft::vector<Fixed>::reverse_iterator	it3(it1);
+	ft::vector<Fixed>::reverse_iterator	it4 = it1;
 
 	std::cout << "*( it3( it1 ) ) = " << *it3 << std::endl;
 	std::cout << "*( it4 = it1 ) = " << *it4 << std::endl;
@@ -55,8 +55,8 @@ void	test_reverse_iterator_2()
 
 	std::cout << "------------------------------------------------------------" << std::endl;
 
-	std::vector<Fixed>::reverse_iterator	it5 = it1 + 3;
-	std::vector<Fixed>::reverse_iterator	it6 = it5 - 2;
+	ft::vector<Fixed>::reverse_iterator	it5 = it1 + 3;
+	ft::vector<Fixed>::reverse_iterator	it6 = it5 - 2;
 
 	std::cout << "it5 = it1 + 3 = " << *it5 << std::endl;
 	std::cout << "it6 = it5 - 2 = " << *it6 << std::endl;
@@ -141,7 +141,7 @@ void	test_reverse_iterator_2()
 	
 	std::cout << "------------------------------------------------------------" << std::endl;
 
-	std::vector<Fixed>::reverse_iterator	it7 = 2 + it1;
+	ft::vector<Fixed>::reverse_iterator	it7 = 2 + it1;
 
 	std::cout << "it7 = 2 + it1 = " << *it7 << std::endl;
 

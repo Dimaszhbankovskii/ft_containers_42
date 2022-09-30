@@ -9,9 +9,18 @@
 
 namespace ft
 {
+	/********************************************************/
+	/******            VECTOR CLASS TEMPLATE            *****/
+	/********************************************************/
+
 	template <typename T, typename Allocator = std::allocator<T> >
 	class vector
 	{
+
+		/*********************************************/
+		/******           MEMBER TYPES           *****/
+		/*********************************************/
+
 	public:
 		typedef T													value_type;
 		typedef Allocator											allocator_type;
@@ -25,15 +34,31 @@ namespace ft
 		typedef typename ft::iterator<const value_type*>			const_iterator;
 		typedef typename ft::reverse_iterator<value_type*>			reverse_iterator;
 		typedef typename ft::reverse_iterator<const value_type*>	const_reverse_iterator;
-	
+
+		/*********************************************/
+		/******          MEMBER OBJECTS          *****/
+		/*********************************************/
+
 	private:
 		allocator_type	_allocator;
 		pointer			_prt;
 		size_type		_capacity;
 		size_type		_size;
 
+		/*********************************************/
+		/******         MEMBER FUNCTIONS         *****/
+		/*********************************************/
+
 	public:
-		explicit vector(const allocator_type& allocator = allocator_type())
+		vector()
+		{
+			this->_allocator = allocator_type();
+			this->_prt = NULL;
+			this->_capacity = 0;
+			this->_size = 0;
+		}
+
+		explicit vector(const allocator_type& allocator)
 		{
 			this->_allocator = allocator;
 			this->_prt = NULL;
@@ -41,8 +66,7 @@ namespace ft
 			this->_size = 0;
 		}
 
-		explicit vector(size_type n, const value_type& value = value_type(), \
-		const allocator_type& allocator = allocator_type())
+		explicit vector(size_type n, const value_type& value = value_type(), const allocator_type& allocator = allocator_type())
 		{
 			this->_allocator = allocator;
 			this->_prt = this->_allocator.allocate(n);
@@ -52,11 +76,53 @@ namespace ft
 				this->_allocator.construct(this->_prt + i, value);
 		}
 
+		template <typename InputIt>
+		vector(InputIt first, InputIt last, const allocator_type& allocator = allocator_type())
+		{
+			size_type	size = last - first;
+			
+			this->_allocator = allocator;
+			this->_prt = this->_allocator.allocate(size);
+			this->_capacity = size;
+			this->_size = size;
+			for (size_type i = 0; i < this->_size; ++i)
+				this->_allocator.construct(this->_prt + i, *(first + i));
+		}
+
+		// vector(const vector& src)
+		// {
+
+		// }
+
 		~vector()
 		{
 			this->clear();
 			this->_allocator.deallocate(this->_prt, this->_capacity);
 		}
+
+		// vector&	opeartor=(const vector& src)
+		// {
+
+		// }
+
+		void	assign(size_type count, const value_type& value)
+		{
+			if (!count)
+				return ;
+			this->clear();
+			this->reserve(count);
+			this->_size = count;
+			for (size_type i = 0; this->_size; ++i)
+				this->_allocator.allocate(this->_prt + i; value);
+		}
+
+		// template <typename InputIt>
+		// void	assign(InputIt first, InputIt last)
+		// {
+
+		// }
+
+		allocator_type	get_allocator() const { return this->_allocator; }
 
 		/*********************************************/
 		/******          ELEMENT ACCESS          *****/
@@ -136,6 +202,16 @@ namespace ft
 			this->_size = 0;
 		}
 
+		// iterator insert( const_iterator pos, const T& value );
+		// iterator insert( const_iterator pos, size_type count, const T& value );
+		// constexpr iterator insert( const_iterator pos, size_type count, const T& value );
+
+		// template< class InputIt >
+		// iterator insert( const_iterator pos, InputIt first, InputIt last );
+
+		// iterator erase( iterator pos );
+		// iterator erase( iterator first, iterator last );
+
 		void	push_back(const_reference value)
 		{
 			if (this->_size == this->_capacity)
@@ -149,6 +225,10 @@ namespace ft
 			this->_allocator.destroy(this->_prt + this->_size - 1);
 			--this->_size;
 		}
+
+		// void resize( size_type count, T value = T() );
+
+		// void swap( vector& other );
 	};
 }
 

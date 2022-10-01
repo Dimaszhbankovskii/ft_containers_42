@@ -4,8 +4,9 @@
 # include <limits>
 # include <algorithm>
 # include <stdexcept>
-# include <iterator>
+// # include <iterator>
 # include "iterator.hpp"
+# include "type_traits.hpp"
 
 namespace ft
 {
@@ -80,8 +81,10 @@ namespace ft
 		vector(InputIt first, InputIt last, const allocator_type& allocator = allocator_type())
 		{
 			size_type	size = last - first;
-			
+
 			this->_allocator = allocator;
+			if (size > this->max_size())
+				throw std::length_error("cannot create ft::vector larger than max_size()");
 			this->_prt = this->_allocator.allocate(size);
 			this->_capacity = size;
 			this->_size = size;
@@ -89,10 +92,14 @@ namespace ft
 				this->_allocator.construct(this->_prt + i, *(first + i));
 		}
 
-		// vector(const vector& src)
-		// {
-
-		// }
+		vector(const vector& src)
+		{
+			this->_allocator = src._allocator;
+			this->_prt = NULL;
+			this->_capacity = 0;
+			this->_size = 0;
+			*this = src;
+		}
 
 		~vector()
 		{
@@ -100,10 +107,20 @@ namespace ft
 			this->_allocator.deallocate(this->_prt, this->_capacity);
 		}
 
-		// vector&	opeartor=(const vector& src)
-		// {
-
-		// }
+		vector&	operator=(const vector& src)
+		{
+			if (this == &src)
+				return *this;
+			this->clear();
+			this->_allocator.deallocate(this->_prt, this->_capacity);
+			this->_allocator = src._allocator;
+			this->_capacity = src._capacity;
+			this->_size = src._size;
+			this->_prt = this->_allocator.allocate(this->_capacity);
+			for (size_type i = 0; i < this->_size; ++i)
+				this->_allocator.construct(this->_prt + i, *(src._prt + i));
+			return *this;
+		}
 
 		void	assign(size_type count, const value_type& value)
 		{
@@ -112,15 +129,24 @@ namespace ft
 			this->clear();
 			this->reserve(count);
 			this->_size = count;
-			for (size_type i = 0; this->_size; ++i)
-				this->_allocator.allocate(this->_prt + i; value);
+			for (size_type i = 0; i < this->_size; ++i)
+				this->_allocator.construct(this->_prt + i, value);
 		}
 
-		// template <typename InputIt>
-		// void	assign(InputIt first, InputIt last)
-		// {
+		template <typename InputIt>
+		typename ft::enable_if<!ft::is_integral<InputIt>::value, void>::type
+		assign(InputIt first, InputIt last)
+		{
+			size_type	size = last - first;
 
-		// }
+			if (size > this->max_size())
+				throw std::length_error("cannot create ft::vector larger than max_size()");
+			this->clear();
+			this->reserve(size);
+			this->_size = size;
+			for (size_type i = 0; i < this->_size; ++i)
+				this->_allocator.construct(this->_prt + i, *(first + i));
+		}
 
 		allocator_type	get_allocator() const { return this->_allocator; }
 
@@ -203,7 +229,13 @@ namespace ft
 		}
 
 		// iterator insert( const_iterator pos, const T& value );
-		// iterator insert( const_iterator pos, size_type count, const T& value );
+
+		// iterator	insert(const_iterator pos, size_type count, const_reference value)
+		// {
+		// 	size_type	ind = pos - this->begin();
+		// 	size_type	new_size = this->_size + count;
+		// }
+		
 		// constexpr iterator insert( const_iterator pos, size_type count, const T& value );
 
 		// template< class InputIt >

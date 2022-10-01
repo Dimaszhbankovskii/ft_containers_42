@@ -22,6 +22,10 @@ void	test_iterator_2();
 void	test_reverse_iterator_1();
 void	test_reverse_iterator_2();
 
+void	test_vector_1();
+void	test_vector_1_element_access();
+void	test_vector_1_iterators();
+
 class Fixed
 {
 private:

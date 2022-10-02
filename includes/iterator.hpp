@@ -5,6 +5,13 @@
 
 namespace ft
 {
+	template<typename T> struct remove_const { typedef T type; };
+	template<typename T> struct remove_const <const T> { typedef T type; };
+
+	/********************************************************/
+	/******               ITERATOR_TRAITS               *****/
+	/********************************************************/
+
 	template <typename Iterator>
 	struct iterator_traits
 	{
@@ -43,7 +50,6 @@ namespace ft
 	template <typename Iter>
 	class iterator
 	{
-
 		/*********************************************/
 		/******           MEMBER TYPES           *****/
 		/*********************************************/
@@ -69,17 +75,28 @@ namespace ft
 
 	public:
 		iterator() {}
-		iterator(const iterator& src) { *this = src; }
+		// iterator(const iterator& src) { *this = src; }
+
+		iterator(const iterator<typename remove_const<value_type>::type >& src) { *this = src; }
+
 		iterator(pointer current) { this->_current = current; }
 		~iterator() {}
 
-		iterator		&operator=(const iterator &src)
+		iterator<value_type>&	operator=(const iterator<typename remove_const<value_type>::type >& src)
 		{
 			if (this == &src)
 				return *this;
 			this->_current = src._current;
 			return *this;
 		}
+
+		// iterator<value_type>&	operator=(const iterator<typename ft::remove_const<value_type>::type> &src)
+		// {
+		// 	if (this == &src)
+		// 		return *this;
+		// 	this->_current = src._current;
+		// 	return *this;
+		// }
 		
 		iterator_type	base() const { return this->_current; }
 		
@@ -121,7 +138,6 @@ namespace ft
 	template <typename Iter>
 	class reverse_iterator
 	{
-
 		/*********************************************/
 		/******           MEMBER TYPES           *****/
 		/*********************************************/

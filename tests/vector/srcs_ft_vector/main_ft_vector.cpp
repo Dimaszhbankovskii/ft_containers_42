@@ -58,5 +58,13 @@ int	main()
 
 	test_vector_1_iterators();
 
+	std::cout << VIOLET;
+	std::cout << "------------------------------------------------------------" << std::endl;
+	std::cout << "------------      TEST VECTOR 1 ( CAPACITY )     -----------" << std::endl;
+	std::cout << "------------------------------------------------------------" << std::endl;
+	std::cout << NORMAL;
+
+	test_vector_1_capacity();
+
 	return 0;
 }

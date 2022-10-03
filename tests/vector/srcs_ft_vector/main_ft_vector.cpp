@@ -18,21 +18,21 @@ int	main()
 	
 	test_iterator_2();
 
-	// std::cout << VIOLET;
-	// std::cout << "------------------------------------------------------------" << std::endl;
-	// std::cout << "------------   TEST VECTOR_REVERSE_ITERATOR 1   ------------" << std::endl;
-	// std::cout << "------------------------------------------------------------" << std::endl;
-	// std::cout << NORMAL;
+	std::cout << VIOLET;
+	std::cout << "------------------------------------------------------------" << std::endl;
+	std::cout << "------------   TEST VECTOR_REVERSE_ITERATOR 1   ------------" << std::endl;
+	std::cout << "------------------------------------------------------------" << std::endl;
+	std::cout << NORMAL;
 
-	// test_reverse_iterator_1();
+	test_reverse_iterator_1();
 
-	// std::cout << VIOLET;
-	// std::cout << "------------------------------------------------------------" << std::endl;
-	// std::cout << "------------   TEST VECTOR_REVERSE_ITERATOR 2   ------------" << std::endl;
-	// std::cout << "------------------------------------------------------------" << std::endl;
-	// std::cout << NORMAL;
+	std::cout << VIOLET;
+	std::cout << "------------------------------------------------------------" << std::endl;
+	std::cout << "------------   TEST VECTOR_REVERSE_ITERATOR 2   ------------" << std::endl;
+	std::cout << "------------------------------------------------------------" << std::endl;
+	std::cout << NORMAL;
 
-	// test_reverse_iterator_2();
+	test_reverse_iterator_2();
 
 	// std::cout << VIOLET;
 	// std::cout << "------------------------------------------------------------" << std::endl;

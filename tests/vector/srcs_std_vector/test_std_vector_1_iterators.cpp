@@ -24,43 +24,43 @@ void	test_vector_1_iterators()
 	std::cout << "------------------------------------------------------------" << std::endl;
 
 	std::vector<int>::iterator					it1 = intVector1.begin();
-	// std::vector<int>::const_iterator			it2 = intVector1.begin();
+	std::vector<int>::const_iterator			it2 = intVector1.begin();
 
 	std::vector<int>::iterator					it3 = intVector1.end() - 1;
-	// std::vector<int>::const_iterator			it4 = intVector1.end() - 1;
+	std::vector<int>::const_iterator			it4 = intVector1.end() - 1;
 
 	std::vector<int>::reverse_iterator			rIt1 = intVector1.rbegin();
-	// std::vector<int>::const_reverse_iterator	rIt2 = intVector1.rbegin();
+	std::vector<int>::const_reverse_iterator	rIt2 = intVector1.rbegin();
 	
 	std::vector<int>::reverse_iterator			rIt3 = intVector1.rend() - 1;
-	// std::vector<int>::const_reverse_iterator	rIt4 = intVector1.rend() - 1;
+	std::vector<int>::const_reverse_iterator	rIt4 = intVector1.rend() - 1;
 
 	std::cout << "iterator                intVector1.begin()  = " << *it1 << std::endl;
-	// std::cout << "const_iterator          intVector1.begin()  = " << *it2 << std::endl;
+	std::cout << "const_iterator          intVector1.begin()  = " << *it2 << std::endl;
 
 	std::cout << "iterator                intVector1.end()    = " << *it3 << std::endl;
-	// std::cout << "const_iterator          intVector1.end()    = " << *it4 << std::endl;
+	std::cout << "const_iterator          intVector1.end()    = " << *it4 << std::endl;
 
 	std::cout << "reverse_iterator        intVector1.rbegin() = " << *rIt1 << std::endl;
-	// std::cout << "const_reverse_iterator  intVector1.rbegin() = " << *rIt2 << std::endl;
+	std::cout << "const_reverse_iterator  intVector1.rbegin() = " << *rIt2 << std::endl;
 
 	std::cout << "reverse_iterator        intVector1.rend()   = " << *rIt3 << std::endl;
-	// std::cout << "const_reverse_iterator  intVector1.rend()   = " << *rIt4 << std::endl;
+	std::cout << "const_reverse_iterator  intVector1.rend()   = " << *rIt4 << std::endl;
 
 	*it1 = 10;
 	std::cout << BLUE << "$>> *( it1 = intVector1.begin() ) = 10" << NORMAL << std::endl;
 
 	std::cout << "iterator                intVector1.begin()  = " << *it1 << std::endl;
-	// std::cout << "const_iterator          intVector1.begin()  = " << *it2 << std::endl;
+	std::cout << "const_iterator          intVector1.begin()  = " << *it2 << std::endl;
 
 	std::cout << "iterator                intVector1.end()    = " << *it3 << std::endl;
-	// std::cout << "const_iterator          intVector1.end()    = " << *it4 << std::endl;
+	std::cout << "const_iterator          intVector1.end()    = " << *it4 << std::endl;
 
 	std::cout << "reverse_iterator        intVector1.rbegin() = " << *rIt1 << std::endl;
-	// std::cout << "const_reverse_iterator  intVector1.rbegin() = " << *rIt2 << std::endl;
+	std::cout << "const_reverse_iterator  intVector1.rbegin() = " << *rIt2 << std::endl;
 
 	std::cout << "reverse_iterator        intVector1.rend()   = " << *rIt3 << std::endl;
-	// std::cout << "const_reverse_iterator  intVector1.rend()   = " << *rIt4 << std::endl;
+	std::cout << "const_reverse_iterator  intVector1.rend()   = " << *rIt4 << std::endl;
 
 	std::cout << "------------------------------------------------------------" << std::endl;
 }

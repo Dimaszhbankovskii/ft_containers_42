@@ -30,7 +30,7 @@ void	test_reverse_iterator_2()
 	std::cout << "------------------------------------------------------------" << std::endl;
 	std::cout << CYAN;
 	std::cout << "------------------------------------------------------------" << std::endl;
-	std::cout << "-----------   TEST VECTOR_REVERSE_ITERATOR 1.1   -----------" << std::endl;
+	std::cout << "-----------   TEST VECTOR_REVERSE_ITERATOR 2.1   -----------" << std::endl;
 	std::cout << "------------------------------------------------------------" << std::endl;
 	std::cout << NORMAL;
 	std::cout << "------------------------------------------------------------" << std::endl;
@@ -163,7 +163,7 @@ void	test_reverse_iterator_2()
 	std::cout << "------------------------------------------------------------" << std::endl;
 	std::cout << CYAN;
 	std::cout << "------------------------------------------------------------" << std::endl;
-	std::cout << "-----------   TEST VECTOR_REVERSE_ITERATOR 1.2   -----------" << std::endl;
+	std::cout << "-----------   TEST VECTOR_REVERSE_ITERATOR 2.2   -----------" << std::endl;
 	std::cout << "------------------------------------------------------------" << std::endl;
 	std::cout << NORMAL;
 	std::cout << "------------------------------------------------------------" << std::endl;
@@ -296,7 +296,7 @@ void	test_reverse_iterator_2()
 	std::cout << "------------------------------------------------------------" << std::endl;
 	std::cout << CYAN;
 	std::cout << "------------------------------------------------------------" << std::endl;
-	std::cout << "-----------   TEST VECTOR_REVERSE_ITERATOR 1.3   -----------" << std::endl;
+	std::cout << "-----------   TEST VECTOR_REVERSE_ITERATOR 2.3   -----------" << std::endl;
 	std::cout << "------------------------------------------------------------" << std::endl;
 	std::cout << NORMAL;
 	std::cout << "------------------------------------------------------------" << std::endl;

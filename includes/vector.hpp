@@ -4,7 +4,6 @@
 # include <limits>
 # include <algorithm>
 # include <stdexcept>
-// # include <iterator>
 # include "iterator.hpp"
 # include "type_traits.hpp"
 
@@ -199,7 +198,7 @@ namespace ft
 			if (new_cap > this->_capacity)
 			{
 				if (new_cap > this->max_size())
-					throw std::length_error("vector::reverse");
+					throw std::length_error("vector::reserve");
 				
 				pointer		new_prt = _allocator.allocate(new_cap);
 				for (size_t i = 0; i < this->_size; ++i)

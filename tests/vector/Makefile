@@ -32,11 +32,11 @@ SRCS_FT_VECTOR_LIST		=	main_ft_vector.cpp \
 							test_ft_iterator_1.cpp \
 							test_ft_iterator_2.cpp \
 							test_ft_reverse_iterator_1.cpp \
-							test_ft_reverse_iterator_2.cpp
-# test_ft_vector_1.cpp
-# test_ft_vector_1_element_access.cpp
-# test_ft_vector_1_iterators.cpp
-# test_ft_vector_1_capacity.cpp
+							test_ft_reverse_iterator_2.cpp \
+							test_ft_vector_1.cpp \
+							test_ft_vector_1_element_access.cpp \
+							test_ft_vector_1_iterators.cpp \
+							test_ft_vector_1_capacity.cpp
 SRCS_FT_VECTOR			=	$(addprefix $(DIR_FT_VECTOR)/,$(SRCS_FT_VECTOR_LIST))
 
 

@@ -2,12 +2,10 @@
 # define ITERATOR_HPP
 
 # include <cstddef>
+# include "type_traits.hpp"
 
 namespace ft
 {
-	template<typename T> struct remove_const { typedef T type; };
-	template<typename T> struct remove_const <const T> { typedef T type; };
-
 	/********************************************************/
 	/******               ITERATOR_TRAITS               *****/
 	/********************************************************/
@@ -43,24 +41,24 @@ namespace ft
 	};
 
 
-	/********************************************************/
-	/******           ITERATOR CLASS TEMPLATE           *****/
-	/********************************************************/
+	/**********************************************************************/
+	/******           RANDOM_ACCESS_ITERATOR CLASS TEMPLATE           *****/
+	/**********************************************************************/
 
-	template <typename Iter>
-	class iterator
+	template <typename It>
+	class RandomAccessIterator
 	{
 		/*********************************************/
 		/******           MEMBER TYPES           *****/
 		/*********************************************/
 
 	public:
-		typedef	Iter													iterator_type;
-		typedef typename ft::iterator_traits<Iter>::difference_type		difference_type;
-		typedef typename ft::iterator_traits<Iter>::value_type			value_type;
-		typedef typename ft::iterator_traits<Iter>::pointer				pointer;
-		typedef typename ft::iterator_traits<Iter>::reference			reference;
-		typedef typename ft::iterator_traits<Iter>::iterator_category	iterator_category;
+		typedef typename ft::iterator_traits<It*>::difference_type		difference_type;
+		typedef typename ft::iterator_traits<It*>::value_type			value_type;
+		typedef typename ft::iterator_traits<It*>::pointer				pointer;
+		typedef typename ft::iterator_traits<It*>::reference			reference;
+		typedef	pointer													iterator_type;
+		typedef std::random_access_iterator_tag							iterator_category;
 
 		/*********************************************/
 		/******          MEMBER OBJECTS          *****/
@@ -74,29 +72,16 @@ namespace ft
 		/*********************************************/
 
 	public:
-		iterator() {}
-		// iterator(const iterator& src) { *this = src; }
+		RandomAccessIterator() {}
+		RandomAccessIterator(pointer current) { this->_current = current; }
+		RandomAccessIterator(const RandomAccessIterator<typename ft::remove_const<value_type>::type >& src) { this->_current = &(*src); }
+		~RandomAccessIterator() {}
 
-		iterator(const iterator<typename remove_const<value_type>::type >& src) { *this = src; }
-
-		iterator(pointer current) { this->_current = current; }
-		~iterator() {}
-
-		iterator<value_type>&	operator=(const iterator<typename remove_const<value_type>::type >& src)
+		RandomAccessIterator&	operator=(const RandomAccessIterator<typename ft::remove_const<value_type>::type >& src)
 		{
-			if (this == &src)
-				return *this;
-			this->_current = src._current;
+			this->_current = &(*src);
 			return *this;
 		}
-
-		// iterator<value_type>&	operator=(const iterator<typename ft::remove_const<value_type>::type> &src)
-		// {
-		// 	if (this == &src)
-		// 		return *this;
-		// 	this->_current = src._current;
-		// 	return *this;
-		// }
 		
 		iterator_type	base() const { return this->_current; }
 		
@@ -105,29 +90,29 @@ namespace ft
 		
 		reference		operator[](difference_type n) const { return *(this->_current + n); }
 
-		iterator&		operator++() { this->_current++; return *this; }
-		iterator		operator++(__attribute__((unused)) int unused) { iterator result(*this); this->_current++; return result; }
-		iterator&		operator+=(difference_type n) { this->_current += n; return *this; }
-		iterator		operator+(difference_type n) const { return iterator(this->_current + n); }
-		iterator&		operator--() { this->_current--; return *this; }
-		iterator		operator--(__attribute__((unused)) int unused) { iterator result(*this); this->_current--; return result; }
-		iterator&		operator-=(difference_type n) { this->_current -= n; return *this; }
-		iterator		operator-(difference_type n) const { return iterator(this->_current - n); }
+		RandomAccessIterator&	operator++() { this->_current++; return *this; }
+		RandomAccessIterator	operator++(__attribute__((unused)) int unused) { RandomAccessIterator result(*this); this->_current++; return result; }
+		RandomAccessIterator&	operator+=(difference_type n) { this->_current += n; return *this; }
+		RandomAccessIterator	operator+(difference_type n) const { return RandomAccessIterator(this->_current + n); }
+		RandomAccessIterator&	operator--() { this->_current--; return *this; }
+		RandomAccessIterator	operator--(__attribute__((unused)) int unused) { RandomAccessIterator result(*this); this->_current--; return result; }
+		RandomAccessIterator&	operator-=(difference_type n) { this->_current -= n; return *this; }
+		RandomAccessIterator	operator-(difference_type n) const { return RandomAccessIterator(this->_current - n); }
 
 		/**********************************************************************/
 		/******       NON-MEMBER FUNCTIONS - ITERATOR CLASS TEMPLATE      *****/
 		/**********************************************************************/
 
-		friend bool		operator==(const iterator& left, const iterator& rigth) { return left._current == rigth._current; }
-		friend bool		operator!=(const iterator& left, const iterator& rigth) { return left._current != rigth._current; }
-		friend bool		operator<(const iterator& left, const iterator& rigth) { return left._current < rigth._current; }
-		friend bool 	operator<=(const iterator& left, const iterator& rigth) { return left._current <= rigth._current; }
-		friend bool		operator>(const iterator& left, const iterator& rigth) { return left._current > rigth._current; }
-		friend bool 	operator>=(const iterator& left, const iterator& rigth) { return left._current >= rigth._current; }
+		friend bool		operator==(const RandomAccessIterator& left, const RandomAccessIterator& rigth) { return *left == *rigth; }
+		friend bool		operator!=(const RandomAccessIterator& left, const RandomAccessIterator& rigth) { return *left != *rigth; }
+		friend bool		operator<(const RandomAccessIterator& left, const RandomAccessIterator& rigth) { return *left < *rigth; }
+		friend bool 	operator<=(const RandomAccessIterator& left, const RandomAccessIterator& rigth) { return *left <= *rigth; }
+		friend bool		operator>(const RandomAccessIterator& left, const RandomAccessIterator& rigth) { return *left > *rigth; }
+		friend bool 	operator>=(const RandomAccessIterator& left, const RandomAccessIterator& rigth) { return *left >= *rigth; }
 
-		friend iterator	operator+(difference_type n, const iterator& src) { return iterator(src._current + n); }
+		friend RandomAccessIterator	operator+(difference_type n, const RandomAccessIterator& src) { return RandomAccessIterator(src._current + n); }
 
-		friend difference_type	operator-(const iterator& left, const iterator& right) { return left._current - right._current; }
+		friend difference_type	operator-(const RandomAccessIterator& left, const RandomAccessIterator& right) { return left._current - right._current; }
 	};
 
 

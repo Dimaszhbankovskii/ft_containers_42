@@ -27,6 +27,7 @@ void	test_vector_1();
 void	test_vector_1_element_access();
 void	test_vector_1_iterators();
 void	test_vector_1_capacity();
+void	test_vector_1_modifiers();
 
 class Fixed
 {

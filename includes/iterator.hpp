@@ -214,6 +214,60 @@ namespace ft
 	typename ft::reverse_iterator<Iterator>::difference_type
 	operator-(const ft::reverse_iterator<Iterator> &left, const ft::reverse_iterator<Iterator> &right)
 	{ return right.base() - left.base(); }
+
+
+	/**********************************************************************/
+	/******           BIDIRECTIONAL_ITERATOR CLASS TEMPLATE           *****/
+	/**********************************************************************/
+
+	template <typename It>
+	class BidirectionalIterator
+	{
+		/*********************************************/
+		/******           MEMBER TYPES           *****/
+		/*********************************************/
+
+	public:
+		typedef typename ft::iterator_traits<It*>::difference_type		difference_type;
+		typedef typename ft::iterator_traits<It*>::value_type			value_type;
+		typedef typename ft::iterator_traits<It*>::pointer				pointer;
+		typedef typename ft::iterator_traits<It*>::reference			reference;
+		typedef	pointer													iterator_type;
+		typedef std::bidirectional_iterator_tag							iterator_category;
+
+		/*********************************************/
+		/******          MEMBER OBJECTS          *****/
+		/*********************************************/
+
+	protected:
+		pointer	_current;
+
+		/*********************************************/
+		/******         MEMBER FUNCTIONS         *****/
+		/*********************************************/
+
+	public:
+		BidirectionalIterator() {}
+		BidirectionalIterator(pointer current) { this->_current = current; }
+		BidirectionalIterator(const BidirectionalIterator<typename ft::remove_const<value_type>::type >& src) { this->_current = &(*src); }
+
+		BidirectionalIterator&	operator=(const BidirectionalIterator<typename ft::remove_const<value_type>::type >& src)
+		{
+			this->_current = &(*src);
+			return *this;
+		}
+		
+		reference	operator*() const { return *this->_current; }
+		pointer		operator->() const { return this->_current; }
+		
+		BidirectionalIterator&	operator++() { this->_current++; return *this; }
+		BidirectionalIterator	operator++(__attribute__((unused)) int unused) { BidirectionalIterator result(*this); this->_current++; return result; }
+		BidirectionalIterator&	operator--() { this->_current--; return *this; }
+		BidirectionalIterator	operator--(__attribute__((unused)) int unused) { BidirectionalIterator result(*this); this->_current--; return result; }
+
+		friend bool	operator==(const BidirectionalIterator& left, const BidirectionalIterator& rigth) { return *left == *rigth; }
+		friend bool	operator!=(const BidirectionalIterator& left, const BidirectionalIterator& rigth) { return *left != *rigth; }
+	};
 }
 
 #endif

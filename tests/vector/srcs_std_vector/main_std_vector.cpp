@@ -66,5 +66,13 @@ int	main()
 
 	test_vector_1_capacity();
 
+	std::cout << VIOLET;
+	std::cout << "------------------------------------------------------------" << std::endl;
+	std::cout << "-----------      TEST VECTOR 1 ( MODIFIERS )     -----------" << std::endl;
+	std::cout << "------------------------------------------------------------" << std::endl;
+	std::cout << NORMAL;
+
+	test_vector_1_modifiers();
+
 	return 0;
 }

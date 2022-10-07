@@ -193,6 +193,7 @@ namespace ft
 		bool		empty() const { return this->_size == 0; }
 		size_type	size() const { return this->_size; }
 		size_type	max_size() const { return std::min(this->_allocator.max_size(), std::numeric_limits<size_type>::max()); }
+		
 		void		reserve(size_type new_cap)
 		{
 			if (new_cap > this->_capacity)
@@ -200,19 +201,21 @@ namespace ft
 				if (new_cap > this->max_size())
 					throw std::length_error("vector::reserve");
 				
-				pointer		new_prt = _allocator.allocate(new_cap);
+				pointer		new_prt = this->_allocator.allocate(new_cap);
 				for (size_t i = 0; i < this->_size; ++i)
 				{
 					this->_allocator.construct(new_prt + i, *(this->_prt + i));
 					this->_allocator.destroy(this->_prt + i);
-				}				
-				this->_allocator.deallocate(this->_prt, this->_capacity);
+				}
+				if (this->_prt)
+					this->_allocator.deallocate(this->_prt, this->_capacity);
 				this->_prt = new_prt;
 				this->_capacity = new_cap;
 			}
 			else
 				return ;
 		}
+
 		size_type	capacity() const { return this->_capacity; }
 
 		/*********************************************/
@@ -226,18 +229,60 @@ namespace ft
 			this->_size = 0;
 		}
 
-		// iterator insert( const_iterator pos, const T& value );
+		iterator	insert(const_iterator pos, const_reference value)
+		{
+			return this->insert(pos, 1, value);
+		}
 
-		// iterator	insert(const_iterator pos, size_type count, const_reference value)
-		// {
-		// 	size_type	ind = pos - this->begin();
-		// 	size_type	new_size = this->_size + count;
-		// }
-		
-		// constexpr iterator insert( const_iterator pos, size_type count, const T& value );
+		iterator	insert(const_iterator pos, size_type count, const_reference value)
+		{
+			size_type	ind = pos - this->begin();
+			size_type	new_size = this->_size + count;
+			this->reserve(new_size);
+			iterator	it = this->end() - 1;
+			pointer		tmp = this->_prt + new_size - 1;
+			while (it != pos - 1)
+			{
+				this->_allocator.construct(tmp, *it);
+				this->_allocator.destroy(it.base());
+				--it;
+				--tmp;
+			}
+			while (count--)
+			{
+				this->_allocator.construct(tmp, value);
+				--tmp;
+			}
+			this->_size = new_size;
+			return this->begin() + ind;
+		}
 
-		// template< class InputIt >
-		// iterator insert( const_iterator pos, InputIt first, InputIt last );
+		template <typename InputIt>
+		iterator	insert(const_iterator pos, InputIt begin, InputIt end)
+		{
+			size_type	ind = pos - this->begin();
+			size_type	count = end - begin;
+			size_type	new_size = this->_size + count;
+			this->reserve(new_size);
+			iterator	it = this->end() - 1;
+			pointer		tmp = this->_prt + new_size - 1;
+			while (it != pos - 1)
+			{
+				this->_allocator.construct(tmp, *it);
+				this->_allocator.destroy(it.base());
+				--it;
+				--tmp;
+			}
+			tmp -= (count - 1);
+			while (begin != end)
+			{
+				this->_allocator.construct(tmp, *begin);
+				++begin;
+				++tmp;
+			}
+			this->_size = new_size;
+			return this->begin() + ind;
+		}
 
 		// iterator erase( iterator pos );
 		// iterator erase( iterator first, iterator last );
@@ -246,7 +291,7 @@ namespace ft
 		{
 			if (this->_size == this->_capacity)
 				(!this->_capacity) ? this->reserve(1) : this->reserve(this->_capacity * 2);
-			*(this->_prt + this->_size) = value;
+			this->_allocator.construct(this->_prt + this->_size, value);
 			++this->_size;
 		}
 
@@ -260,6 +305,27 @@ namespace ft
 
 		// void swap( vector& other );
 	};
+
+	template <typename T, typename Alloc>
+	bool operator==(const ft::vector<T, Alloc>& left, const ft::vector<T, Alloc>& right)
+	{
+		if (left.empty() != right.empty())
+			return false;
+		if (left.size() != right.size())
+			return false;
+		for (size_t i = 0; i < left.size(); ++i)
+		{
+			if (left[i] != right[i])
+				return false;
+		}
+		return true;
+	}
+
+	template <typename T, typename Alloc>
+	bool operator!=(const ft::vector<T, Alloc>& left, const ft::vector<T, Alloc>& right)
+	{
+		return !(left == right);
+	}
 }
 
 #endif

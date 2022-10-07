@@ -21,7 +21,8 @@ SRCS_STD_VECTOR_LIST	=	main_std_vector.cpp \
 							test_std_vector_1.cpp \
 							test_std_vector_1_element_access.cpp \
 							test_std_vector_1_iterators.cpp \
-							test_std_vector_1_capacity.cpp
+							test_std_vector_1_capacity.cpp \
+							test_std_vector_1_modifiers.cpp
 SRCS_STD_VECTOR			=	$(addprefix $(DIR_STD_VECTOR)/,$(SRCS_STD_VECTOR_LIST))
 
 DIR_FT_VECTOR			=	srcs_ft_vector
@@ -36,7 +37,8 @@ SRCS_FT_VECTOR_LIST		=	main_ft_vector.cpp \
 							test_ft_vector_1.cpp \
 							test_ft_vector_1_element_access.cpp \
 							test_ft_vector_1_iterators.cpp \
-							test_ft_vector_1_capacity.cpp
+							test_ft_vector_1_capacity.cpp \
+							test_std_vector_1_modifiers.cpp
 SRCS_FT_VECTOR			=	$(addprefix $(DIR_FT_VECTOR)/,$(SRCS_FT_VECTOR_LIST))
 
 

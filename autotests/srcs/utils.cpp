@@ -1,6 +1,6 @@
 #include "./../includes/autotests.hpp"
 
-void    print_header(std::string str)
+void	print_header(std::string str)
 {
 	int margin = (40 - str.length()) / 2;
 	int width = (margin * 2 + str.length()) + 2;
@@ -9,6 +9,15 @@ void    print_header(std::string str)
 	std::cout << "*" << std::string(margin, ' ') << str << std::string(margin, ' ') << "*" << std::endl;
 	std::cout << std::string(width, '*') << std::endl;
 	std::cout << RESET;
+}
+
+void	check(std::string name, bool good)
+{
+	std::string margin(38 - name.length(), ' ');
+	if (good)
+		std::cout << name << ": " << margin << BOLD << GREEN << GOOD << RESET << std::endl;
+	else
+		std::cout << name << ": " << margin << FAIL << std::endl;
 }
 
 // template <typename T>
@@ -21,11 +30,3 @@ void    print_header(std::string str)
 // 		std::cout << name << ": " << margin << FAIL << std::endl;
 // }
 
-void	check(std::string name, bool good)
-{
-	std::string margin(38 - name.length(), ' ');
-	if (good)
-		std::cout << name << ": " << margin << BOLD << GREEN << GOOD << RESET << std::endl;
-	else
-		std::cout << name << ": " << margin << FAIL << std::endl;
-}

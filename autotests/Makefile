@@ -2,7 +2,7 @@ NAME			=	autotest
 
 CCXX			=	c++
 CXXFLAGS		=	-Wall -Werror -Wextra -std=c++98
-SANITIZE		=	-g3 -fsanitize=address
+# SANITIZE		=	-g3 -fsanitize=address
 
 HEADER_DIR_FT	=	./../includes
 HEADER_FT_LIST	=	vector.hpp \
@@ -50,11 +50,8 @@ $(OBJS_DIR) :
 	@mkdir -p objs
 	@echo "$(CYAN)Creating directory for objects file$(WHITE) --> $@ --> $(GREEN)[Done]$(NORMAL)"	
 
-# ./srcs/%.o: ./srcs/%.cpp
-# 	c++ ${CXXFLAGS} -c $< -o $@
-
-# vector: ${NAME}
-# 	./${NAME} vector
+vector: $(NAME)
+	./$(NAME) vector
 
 # list: ${NAME}
 # 	./${NAME} list

@@ -489,19 +489,6 @@ static void erase()
 		strV2.erase(strV2.begin(), strV2.begin());
 		check("strV1 == strV2", strV1 == strV2);
 	}
-	// {
-	// 	std::string test[] = {"Hey", "what's", "up", "?"};
-	// 	ft::vector<std::string> v1;
-	// 	std::vector<std::string> v2;
-	// 	v1.assign(test, test + 4);
-	// 	v2.assign(test, test + 4);
-	// 	v1.erase(v1.begin() + 2);
-	// 	v2.erase(v2.begin() + 2);
-	// 	check("v1 == v2", v1 == v2);
-	// 	v1.clear();
-	// 	v2.clear();
-	// 	check("v1 == v2", v1 == v2);
-	// }
 }
 
 static void	push_back_pop_back()

@@ -18,7 +18,8 @@ HEADER			=	$(addprefix $(HEADER_DIR_TEST)/,$(HEADER_TEST))
 SRCS_DIR		=	srcs
 SRCS_LIST		=	main.cpp \
 					utils.cpp \
-					vector.cpp
+					vector.cpp \
+					stack.cpp
 SRCS			=	$(addprefix $(SRCS_DIR)/,$(SRCS_LIST))
 
 OBJS_DIR		=	objs
@@ -53,14 +54,14 @@ $(OBJS_DIR) :
 vector: $(NAME)
 	./$(NAME) vector
 
+stack: $(NAME)
+	./$(NAME) stack
+
 # list: ${NAME}
 # 	./${NAME} list
 
 # map: ${NAME}
 # 	./${NAME} map
-
-# stack: ${NAME}
-# 	./${NAME} stack
 
 # queue: ${NAME}
 # 	./${NAME} queue

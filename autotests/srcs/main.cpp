@@ -14,6 +14,8 @@ int	main(int argc, char **argv)
 
 	if (nameTest == "vector")
 		test_vector();
+	else if (nameTest == "stack")
+		test_stack();
 	else
 		std::cout << "No test for " << nameTest << std::endl;
 
@@ -21,8 +23,6 @@ int	main(int argc, char **argv)
 	// 	test_list();
 	// else if (choice == "map")
 	// 	test_map();
-	// else if (choice == "stack")
-	// 	test_stack();
 	// else if (choice == "queue")
 	// 	test_queue();
 	// else if (choice == "all")

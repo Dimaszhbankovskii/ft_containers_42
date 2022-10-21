@@ -1,7 +1,7 @@
 #ifndef STACK_HPP
 # define STACK_HPP
 
-# include <vector>
+# include "vector.hpp"
 
 namespace ft
 {
@@ -9,7 +9,7 @@ namespace ft
 	/******            STACK CLASS TEMPLATE             *****/
 	/********************************************************/
 
-	template < typename T, typename Container = std::vector<T> >
+	template < typename T, typename Container = ft::vector<T> >
 	class stack
 	{
 		/*********************************************/

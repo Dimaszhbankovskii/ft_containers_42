@@ -29,15 +29,14 @@
 # define GOOD "✅"
 # define FAIL "❌"
 
-void	test_vector(void);
-void	test_stack(void);
+void	test_vector();
+void	test_stack();
 
 void    print_header(std::string str);
+void	check(std::string name, bool good);
 
 // template <typename T>
 // void	check1(std::string name, T a, T b);
-
-void	check(std::string name, bool good);
 
 template <typename T>
 bool	operator==(ft::vector<T> &a, std::vector<T> &b);

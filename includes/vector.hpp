@@ -75,7 +75,7 @@ namespace ft
 				this->_allocator.construct(this->_prt + i, value);
 		}
 
-		template <typename InputIt>
+		template <typename InputIt >
 		vector(InputIt first, InputIt last, const allocator_type& allocator = allocator_type())
 		{
 			size_type	size = last - first;
@@ -151,7 +151,6 @@ namespace ft
 		/*********************************************/
 		/******          ELEMENT ACCESS          *****/
 		/*********************************************/
-
 		reference	at(size_type pos)
 		{
 			if (pos >= this->_size)
@@ -189,7 +188,6 @@ namespace ft
 		/*********************************************/
 		/******            CAPACITY              *****/
 		/*********************************************/
-
 		bool		empty() const { return this->_size == 0; }
 		size_type	size() const { return this->_size; }
 		size_type	max_size() const { return std::min(this->_allocator.max_size(), std::numeric_limits<size_type>::max()); }
@@ -221,7 +219,6 @@ namespace ft
 		/*********************************************/
 		/******            MODIFIERS             *****/
 		/*********************************************/
-
 		void	clear()
 		{
 			for (size_t i = 0; i < this->_size; ++i)

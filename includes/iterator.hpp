@@ -268,6 +268,8 @@ namespace ft
 		friend bool	operator==(const BidirectionalIterator& left, const BidirectionalIterator& rigth) { return *left == *rigth; }
 		friend bool	operator!=(const BidirectionalIterator& left, const BidirectionalIterator& rigth) { return *left != *rigth; }
 	};
+
+	
 }
 
 #endif
